@@ -4,6 +4,8 @@ let resetBtn = document.getElementById("reset-btn");
 // console.log(resetBtn)
 resetBtn.addEventListener("click", reset);
 let headerText = document.querySelector(".header-text");
+
+// used to keep the current state of the game
 const areas = [
     null, null, null, null, null, null, null, null, null
 
@@ -18,10 +20,13 @@ function reset() {
         box.innerText = ""
         box.style.background = ""
         box.style.cursor = "pointer"
+        // allow the user to click the buttons again
+        box.classList.remove("disable")
     })
-    headerText.innerText = "Tic Tac Toe Game";
+    headerText.innerText = "Tic Tac Toe Game ! User Playing as O";
     headerText.style.color = "white"
-    currentPLayer = O_text
+    currentPLayer = O_text;
+
 
 
 }
@@ -47,7 +52,11 @@ function handleClick(e) {
     if (!areas[id]) {
         areas[id] = currentPLayer;
         e.target.innerText = currentPLayer;
-        if (hasPlayerWon(currentPLayer)) { // if(hasPlayerWon(X))
+        e.target.style.cursor = "not-allowed"
+        // disable the button once cliked 
+        e.target.classList.add("disable")
+
+        if (hasPlayerWon(currentPLayer)) {          // if(hasPlayerWon(X))
             headerText.innerText = `Player ${currentPLayer} Won`;
             headerText.style.color = "lightgreen"
             changeWinBoxBg();
@@ -59,7 +68,10 @@ function handleClick(e) {
     // change the current x to o and o to X
     currentPLayer = (currentPLayer == O_text) ? X_text : O_text;
     if (currentPLayer == X_text) {
-        Computerplay()
+        setTimeout(() => {
+
+            Computerplay()
+        }, 500)
 
     }
 
@@ -93,6 +105,10 @@ function hasPlayerWon(cPlayer) {
             winBoxIds = [4, 0, 8];
             return true;
         }
+        if (areas[2] == cPlayer && areas[6] == cPlayer) {
+            winBoxIds = [4, 2, 6];
+            return true;
+        }
     }
     else if (areas[8] == cPlayer) {
         if (areas[2] == cPlayer && areas[5] == cPlayer) {
@@ -117,8 +133,21 @@ function hasPlayerWon(cPlayer) {
     else if (areas[1] == cPlayer) {
         if (areas[4] == cPlayer && areas[7] == cPlayer) {
             winBoxIds = [1, 4, 7];
+            return true;
         }
     }
+    else if (areas[6] == cPlayer) {
+        if (areas[7] == cPlayer && areas[8] == cPlayer) {
+            winBoxIds = [6, 7, 8];
+            return true;
+        }
+        if (areas[4] == cPlayer && areas[2] == cPlayer) {
+            winBoxIds = [6, 4, 2];
+            return true;
+        }
+
+    }
+
     else {
         return false;
     }
@@ -159,7 +188,7 @@ function Computerplay() {
         currentPLayer = O_text;
     }
     else {
-        headerText.innerText = "Draw"
+        headerText.innerText = "Draw 👇 Reset Game"
         headerText.style.color = "red"
     }
 }

@@ -5,23 +5,26 @@
     padding: 0;
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
-    
+
 }
 
 body {
 
-    
+
     background: #121839;
 }
 
 .header-text {
-
-
-    font-size: 40px;
+    font-size: 25px;
     color: #fff;
 
-
 }
+.main .header-text .brTag{
+    font-size: 20px;
+    color: #ad81db;
+}
+
+
 
 .main {
     padding: 0px;
@@ -52,17 +55,22 @@ body {
     color: #000;
     cursor: pointer;
     border-radius: 7px;
+    transition: all 0.3s;
 
 
 }
-.box.disable{
+
+.disable {
     pointer-events: none;
 }
-.box:hover{
+
+.box:hover {
     background: #ad81db;
     border: none;
+    transition: all 0.3s;
 }
-#reset-btn{
+
+#reset-btn {
     padding: 7px;
     margin: 15px;
     background: #b978ff;
