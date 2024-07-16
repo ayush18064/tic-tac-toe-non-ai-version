@@ -23,7 +23,7 @@ function reset() {
         // allow the user to click the buttons again
         box.classList.remove("disable")
     })
-    headerText.innerText = "Tic Tac Toe Game ! User Playing as O";
+    headerText.innerText = "User Playing as O";
     headerText.style.color = "white"
     currentPLayer = O_text;
 
